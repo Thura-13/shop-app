@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/main :: layout(~{:: main})}" xmlns:th="http://www.thymeleaf.org">
+
+
+    <main role="main">
+        <div class="container mt-5">
+            <form action="#" th:action="@{/admin/category/add}" th:object="${category}" method="post">
+                <input type="hidden" name="id" th:field="*{id}">
+               <div class="row">
+                   <div class="col-md-4">
+                       <label for="name" >Name</label>
+                       <input type="text" class="form-control mt-2" id="name" th:field="*{categoryName}" placeholder="Enter Category Name">
+                       <button type="submit" class="btn btn-primary mt-5 me-3">Add Category</button>
+                       <a type="button" href="#" th:href="@{/admin/categories}" class="btn btn-danger mt-5">Cancel</a>
+                   </div>
+               </div>
+            </form>
+        </div>
+    </main>
+
+</html>

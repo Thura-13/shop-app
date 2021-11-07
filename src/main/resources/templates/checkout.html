@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/customer-main :: layout(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <main role="main">
+        <div class="container py-5">
+            <div class="row mt-5">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col">
+                            <h6 >Personal Information</h6>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="First Name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <select class="form-control">
+                                <option selected>Country</option>
+                                <option value="Myanmar">Myanmar</option>
+                                <option value="Myanmar">US</option>
+                                <option value="Myanmar">Malaysia</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Postal Code">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="d-grid g-1 mt-5 m-5">
+                        <a href="#" type="button" th:href="@{/payment/order}" class="btn btn-success">Pay Now</a>
+                    </div>
+                </div>
+                <div class="col-4 bg-light">
+                    <div class="mt-4">
+                        <h6>Your Order</h6>
+                    </div>
+                    <hr class="mt-4">
+                    <div class="row" th:each="product : ${products}">
+                        <div class="col-4">
+                            <p th:text="${product.productName}"></p>
+                        </div>
+                        <div class="col text-end">
+                            <p th:text="${product.price}+' MMK'"></p>
+                        </div>
+                    </div>
+
+                    <hr class="mt-5">
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <h6>TOTAL PRICE</h6>
+                        </div>
+                        <div class="col text-end">
+                            <h5 th:text="${totalPrice}+' MMK'"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

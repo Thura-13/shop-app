@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/main :: layout(~{:: main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container-fluid bg-light mt-5">
+        <h3 class="py-2 text-center">Add Product</h3>
+
+        <form action="#" th:action="@{/admin/product/add}" th:object="${productDto}" method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden" name="id" th:field="*{id}">
+
+            <div class="row mb-1 offset-md-3">
+                <div class="col-md-5">
+                    <label for="category">Category</label>
+                    <select class="form-select mt-1" id="category" th:field="*{categoryId}"
+                            aria-label="Default select example">
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.getCategoryName}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control mt-1"
+                           placeholder=" product name">
+                </div>
+            </div>
+
+
+            <div class="row mb-1  offset-md-3">
+                <div class="col-md-5">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" th:field="*{price}" class="form-control mt-1" placeholder="price">
+                </div>
+                <div class="col-md-5">
+                    <label for="weight">Weight</label>
+                    <input type="number" th:field="*{weight}" id="weight" class="form-control mt-1"
+                           placeholder="weight">
+                </div>
+            </div>
+
+            <div class="row mt-1 offset-md-3">
+                <div class="col-md-6 custom-file">
+                        <label class="custom-file-label">Image</label>
+                        <input type="file" class="custom-file-input form-control mt-1 " name="productImage"
+                           id="productImage" onchange="showImage(event)"/>
+                </div>
+                <div class="col-md-4 preview mt-1">
+                    <img src="" th:src="@{${'/uploads/'+ productDto.imageName}}" id="thu"  style="width: 100px;height: 100px;border: white"/>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-md-8 offset-md-3">
+                    <label for="description">Description</label>
+                    <textarea id="description" th:field="*{description}" class="form-control mt-1" rows="6"></textarea>
+                </div>
+            </div>
+
+            <input type="hidden" name="imgName" th:value="${productDto.imageName}">
+            <button class="btn btn-primary mt-4 offset-md-3" type="submit">Add Product</button>
+
+        </form>
+    </div>
+    <script type="text/javascript">
+        function showImage(event) {
+            if(event.target.files.length > 0) {
+                var src = URL.createObjectURL(event.target.files[0]);
+                var preview = document.getElementById("thu");
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
+    </script>
+</main>
+</body>
+</html>

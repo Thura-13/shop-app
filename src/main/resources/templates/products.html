@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/main :: layout(~{:: main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <main role="main">
+        <div class="container-fluid bg-light mt-5">
+            <div class="container bg-light pt-3">
+                <a href="#" th:href="@{/admin/product/add}" class="btn btn-primary py-2">Add Product</a>
+                <table class="table ">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Preview</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.productName}"></td>
+                        <td th:text="${product.category.categoryName}"></td>
+                        <td><img th:src="'/uploads/'+${product.imageName}" width="100px" height="100px"/></td>
+                        <td>
+                            <a href="#" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-primary">Update</a>
+                        </td>
+                        <td>
+                            <a href="#" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

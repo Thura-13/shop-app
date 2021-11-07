@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/customer-main :: layout(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <main role="main">
+        <div class="container-fluid bg-light mt-5">
+            <div class="container bg-light">
+                <div class="row" >
+                    <div class="col">
+                        <div class="card mt-3 offset-md-4" style="width: 25rem;">
+                            <img src="" th:src="'/uploads/'+${products.imageName}" height="300px" width="200px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h4 th:text="${products.productName}"></h4>
+                                <p th:text="${products.category.categoryName}"></p>
+                                <h3 th:text="${products.price}+' MMK'"></h3>
+                                <h5 th:text="'Weight: '+${products.weight}+' grams'"></h5>
+                                <p th:text="${products.description}"></p>
+                                <a href="#" th:href="@{/addToCart/{id}(id=${products.id})}" class="btn btn-primary">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+<nav th:fragment="navbar" class="navbar fixed-top navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a href="#" class="navbar-brand">
+      E-COMMERCE-APP
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="#" th:href="@{/home}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/shop}" th:hre>Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/cart}">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <span th:text="${cartCount}"></span>
+          </a>
+        </li>
+      </ul>
+      <div class="ms-auto" sec:authorize="!isAuthenticated()">
+        <a class="form-control" href="#" th:href="@{/login}">Login</a>
+      </div>
+      <div class="ms-auto" sec:authorize="isAuthenticated()">
+        <a class="form-control" href="javascript:document.logoutForm.submit()">Logout</a>
+      </div>
+
+      <form action="#" th:action="@{/logout}" name="logoutForm" th:hidden="true" method="post">
+        <input type="submit" hidden value="singn out">
+      </form>
+    </div>
+  </div>
+</nav>
+</body>
+</html>
