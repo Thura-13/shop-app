@@ -50,6 +50,7 @@ public class CartController {
 
     @GetMapping("payment/order")
     public String successOrder(){
+        ProductCartStorage.productList.clear();
         return "order-success";
     }
 

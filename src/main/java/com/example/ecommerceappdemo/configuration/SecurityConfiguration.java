@@ -35,8 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("thura13@gmail.com")
                 .password(encoder.encode("thura"))
                 .roles("ADMIN");
-//        auth.userDetailsService(customUserDetailService);
-          auth.authenticationProvider(authenticationProviderService);
+        auth.userDetailsService(customUserDetailService);
+//          auth.authenticationProvider(authenticationProviderService);
     }
 
     @Override

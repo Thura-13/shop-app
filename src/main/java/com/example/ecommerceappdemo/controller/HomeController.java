@@ -3,6 +3,7 @@ package com.example.ecommerceappdemo.controller;
 import com.example.ecommerceappdemo.service.CategoryService;
 import com.example.ecommerceappdemo.service.ProductService;
 import com.example.ecommerceappdemo.storagedata.ProductCartStorage;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ public class HomeController {
     }
 
     @GetMapping("shop")
-    public String shop(Model model){
-        model.addAttribute("products",productService.findAllProduct());
+    public String shop(Model model,@Param("keyword") String keyword){
+        model.addAttribute("products",productService.findAllProduct(keyword));
         model.addAttribute("categories",categoryService.getAllCategory());
         model.addAttribute("cartCount", ProductCartStorage.productList.size());
         return "shop";

@@ -4,9 +4,11 @@ import com.example.ecommerceappdemo.dto.ProductDTO;
 import com.example.ecommerceappdemo.entities.Product;
 import com.example.ecommerceappdemo.service.CategoryService;
 import com.example.ecommerceappdemo.service.ProductService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +16,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+
+import javax.validation.Valid;
 
 @Controller
 public class ProductController {
@@ -29,8 +33,9 @@ public class ProductController {
     }
 
     @GetMapping("admin/products")
-    public String getProducts(Model model){
-        model.addAttribute("products",service.findAllProduct());
+    public String getProducts(Model model,@Param("keyword") String keyword){
+        model.addAttribute("products",service.findAllProduct(keyword));
+        model.addAttribute("keyword",keyword);
         return "products";
     }
 
@@ -42,18 +47,18 @@ public class ProductController {
     }
 
     @PostMapping("admin/product/add")
-    public String addProduct(@ModelAttribute ProductDTO productDto,
+    public String addProduct(@ModelAttribute(value = "productDto")@Valid ProductDTO productDto,
                              @RequestParam("productImage")MultipartFile file,
                              @RequestParam("imgName") String imgName)throws IOException{
 
-        Product product = new Product();
-        product.setId(productDto.getId());
-        product.setProductName(productDto.getName());
-        product.setCategory(categoryService.getCategoryById(productDto.getCategoryId()));
-        product.setPrice(productDto.getPrice());
-        product.setWeight(productDto.getWeight());
-        product.setDescription(productDto.getDescription());
-
+    		
+    		 Product product = new Product();
+             product.setId(productDto.getId());
+             product.setProductName(productDto.getName());
+             product.setCategory(categoryService.getCategoryById(productDto.getCategoryId()));
+             product.setPrice(productDto.getPrice());
+             product.setWeight(productDto.getWeight());
+             product.setDescription(productDto.getDescription());
         String imgaeUUid;
         if(!file.isEmpty()) {
             imgaeUUid = StringUtils.cleanPath(file.getOriginalFilename());
@@ -69,7 +74,9 @@ public class ProductController {
         service.addProduct(product);
 
 
-        return "redirect:/admin/products";
+        return "redirect:/admin/products?keyword="+product.getProductName();
+        
+    	
     }
 
     @GetMapping("admin/product/delete/{id}")

@@ -16,7 +16,7 @@ public class CategoryService {
     }
 
     public Iterable<Category> getAllCategory() {
-        return repository.findAll();
+            return repository.findAll();
     }
 
     public void saveCategory(Category category){

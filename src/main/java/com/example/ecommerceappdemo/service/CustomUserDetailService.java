@@ -31,6 +31,7 @@ public class CustomUserDetailService  implements UserDetailsService{
 
     public boolean isUserExit(String email){
         return userRepository.findUserByEmail(email).isPresent();
+    	
     }
 
     public User userRegister(User u) {

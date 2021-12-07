@@ -3,6 +3,8 @@ package com.example.ecommerceappdemo.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -12,8 +14,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String productName;
-    private double price;
-    private double weight;
+    private int price;
+    private int weight;
     private String description;
     private String imageName;
 

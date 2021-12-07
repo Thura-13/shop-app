@@ -16,8 +16,12 @@ public class ProductService {
         this.repository = repository;
     }
 
-    public Iterable<Product> findAllProduct(){
-        return repository.findAll();
+    public Iterable<Product> findAllProduct(String keyword){
+        if(keyword !=null){
+            return repository.findAllByProductName(keyword);
+        }else {
+            return repository.findAll();
+        }
     }
 
     public void addProduct(Product product) {
